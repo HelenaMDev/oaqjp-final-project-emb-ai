@@ -26,6 +26,8 @@ def detector():
 
     # Extract the dominant emotion
     dominant_emotion = emotions["dominant_emotion"]
+
+    # Error handling
     if dominant_emotion is None:
         return "<b>Invalid text! Please try again!</b>"
 
