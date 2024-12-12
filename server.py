@@ -10,16 +10,17 @@ def index():
 @app.route("/emotionDetector")
 def detector():
     text_to_analyze = request.args.get("textToAnalyze")
-    if text_to_analyze == "":
-        return "Please enter a text to analyze"
 
     # Get the analysis
     emotions = emotion_detector(text_to_analyze)
 
     # Extract the dominant emotion
     dominant_emotion = emotions["dominant_emotion"]
-    del emotions["dominant_emotion"]
+    if dominant_emotion is None:
+        return "<b>Invalid text! Please try again!</b>"
 
+    # Create the result phrase
+    del emotions["dominant_emotion"]
     result = ""
     for emotion, score in emotions.items():
         if result != "":
